@@ -1,0 +1,36 @@
+
+
+.list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  max-width: 800px;
+}
+
+.list-avatar {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+
+.list-text {
+  font-size: 22px;
+  font-weight: lighter;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.list-costs {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto;
+  color:#F44336;
+}
+

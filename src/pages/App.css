@@ -1,0 +1,28 @@
+.app {
+  max-width: 960px;
+  width: 100%;
+}
+
+.app__header {
+  font-family: 'Galada', cursive;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(33, 165, 241);  
+}
+
+.app__grid {
+  background-color: #fff;
+  margin-left: 20%;
+  margin-right: 20%;
+  min-width: 384px;
+}
+
+.app__counter {
+  /* background-color: rgb(252, 212, 245); */
+  font-family: 'Roboto';
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 35px;
+  font-weight: bold;
+}

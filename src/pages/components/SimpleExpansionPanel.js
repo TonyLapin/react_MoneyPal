@@ -33,9 +33,9 @@ class SimpleExpansionPanel extends React.Component {
     
   };
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
-  };
+  // handleChange = prop => event => {
+  //   this.setState({ [prop]: event.target.value });
+  // };
 
   render() {
     const { classes } = this.props;
@@ -49,7 +49,10 @@ class SimpleExpansionPanel extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
           <FormControl fullWidth>
-            <CostsList COSTS={this.props.costs}/>
+            <CostsList 
+              costs={this.props.costs}
+              incomes={this.props.incomes}
+            />
           </FormControl>
           </ExpansionPanelDetails>
         </ExpansionPanel>

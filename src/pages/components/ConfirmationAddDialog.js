@@ -19,6 +19,7 @@ class ConfirmationAddDialog extends React.Component {
   state = {
     count: this.props.value,
     amount: '',
+    avatar: 'https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/money-circle-green-3-512.png'
   };
 
 
@@ -26,10 +27,35 @@ class ConfirmationAddDialog extends React.Component {
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
-    
   };
 
   handleOk = () => {
+    const today = new Date();
+    const month = today.getMonth()+1;
+    const arr = [ 'January',
+                  'February',  
+                  'March', 
+                  'April', 
+                  'May',
+                  'June',  
+                  'July',  
+                  'August', 
+                  'September',  
+                  'October',  
+                  'November',
+                  'December'
+                ];
+    let monthStr = arr[month-1];
+
+    const newIncomes = {
+      id: Date.now(),
+      cost: this.state.amount,
+      month: monthStr,
+      avatar: this.state.avatar
+
+    };
+    this.props.onIncomesAdd(newIncomes);
+
     let dateNow = new Date();
     let dateNowStr = dateNow.toString();
     let count1 = parseInt(this.props.value);
@@ -38,7 +64,6 @@ class ConfirmationAddDialog extends React.Component {
     this.props.onClose(summ);
     this.props.onCloseIncomes(amount1);
     this.props.onCloseDate(dateNowStr);
-
   };
 
   handleCancel = () => {

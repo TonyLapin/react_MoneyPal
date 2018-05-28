@@ -1,47 +1,35 @@
 import React, { Component } from 'react';
 import './List.css';
-import ListItem from './ListItem';
-
+import ListItemCosts from './ListItemCosts';
 
 class List extends Component {
 
   state = { 
-      costs: this.props.COSTS,
-      term: '',
+      costs: this.props.costs,
   };
-
-  handleFilterStudents = (event) => {
-    this.setState({term: event.target.value});
-  };
-
-  searchFor = term => x => (x.category.toLowerCase().includes(term.toLowerCase()) || !term);
 
   render() {
-
-    const {
-        term,
-        costs
-    } = this.state;
+    const list = this.props.costs.map(s =>
+        <ListItemCosts
+            key={s.id}
+            category={s.category}
+            cost={s.cost}
+            avatar={s.avatar}
+        />
+    );
 
     return (
-      <div style={{textAlign: 'center',
+      <div>
+        <div style={{textAlign: 'center',
                    marginLeft: '20%',
                    marginRight: '20%',
-                   minWidth: 300}}>
-        
-        {/* <input type="text" placeholder="Search the student..." onChange={this.handleFilterStudents}/>
-        <br/> */}
-        <div >
-            {
-                costs.filter(this.searchFor(term)).map(s =>
-                    <ListItem
-                        key={s.id}
-                        category={s.category}
-                        cost={s.cost}
-                        avatar={s.avatar}
-                    />
-                )
-            }
+                   minWidth: 300,
+                   maxHeight: 390,
+                   minHeight: 200,
+                   overflow: "auto"}}>
+
+                {list}
+                
         </div>
       </div>
     );

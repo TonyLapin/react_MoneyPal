@@ -15,6 +15,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+
 class ConfirmationDialog extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -23,8 +24,10 @@ class ConfirmationDialog extends React.Component {
   }
 
   state = {
+    value: this.props.value,
     count: this.props.count,
     amount: '',
+    avatar: ''
   };
 
   // TODO
@@ -46,6 +49,31 @@ class ConfirmationDialog extends React.Component {
   };
 
   handleOk = () => {
+    
+    const today = new Date();
+    const month = today.getMonth()+1;
+    const arr = [ 'January',
+                  'February',  
+                  'March', 
+                  'April', 
+                  'May',
+                  'June',  
+                  'July',  
+                  'August', 
+                  'September',  
+                  'October',  
+                  'November',
+                  'December'
+                ];
+    let monthStr = arr[month-1];
+    const newCosts = {
+      id: Date.now(),
+      category: this.state.value,
+      cost: this.state.amount,
+      month: monthStr,
+      avatar: this.state.avatar
+    };
+    this.props.onCostsAdd(newCosts);
     let dateNow = new Date();
     let dateNowStr = dateNow.toString();
     this.props.onClose(this.state.value);
@@ -59,19 +87,30 @@ class ConfirmationDialog extends React.Component {
 
   handleChangeCategory = (event, value) => {
     this.setState({ value });
+
+    if (value === "Food") {
+      this.setState({ avatar: "http://adcom.co.za/media/com_jbusinessdirectory/pictures/categories/cateringicon-1492074698.png"}); 
+    } else if (value === "Purchases") {
+      this.setState({ avatar: "https://cdn3.iconfinder.com/data/icons/purchases-and-sales/512/transpo.png"});
+    } else if (value === "Entertainment") {
+      this.setState({ avatar: "https://static1.squarespace.com/static/5a157de0b7411ccec817e840/t/5a4546dd0d9297d33044ac7d/1523540988344/framed-and-focused-social-sharing-photobooth.png"});
+    } else {
+      this.setState({ avatar: "https://cdn3.iconfinder.com/data/icons/aami-web-internet/64/aami8-94-256.png"});
+    };
+
   };
   
   handleChangeAmount = prop => event => {
     this.setState({ [prop]: event.target.value });
-    
   };
 
   
   render() {
     console.log('categoryDialog:',this.state.value);
     console.log('amountDialog:',this.state.amount);
+    console.log('amountDialog:',this.state.avatar);
     
-    const options = this.props.dialogOptions;
+    const options = ['Food', 'Purchases', 'Entertainment', 'Other...'];
 
     const { value, ...other } = this.props;
 

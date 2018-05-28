@@ -44,8 +44,6 @@ class MaterialAppBar extends React.Component {
             <Typography variant="title" color="inherit" className={classes.flex}>
                 <p style={{fontSize: 28}}>Money Pal</p>
                 <p>{this.props.count}</p>
-                <p>{this.props.category}</p>
-                <p>{this.props.date}</p>
             </Typography>
 
             <IconButton 

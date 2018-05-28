@@ -8,7 +8,7 @@
   margin: 16px;
   padding-left: 16px;
   padding-right: 16px;
-  border: 1px solid #eaeaea;
+  border: 1px solid #e0747480;
   border-radius: 4px;
   max-width: 800px;
 }
@@ -34,3 +34,34 @@
   color:#F44336;
 }
 
+.list__incomes {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid #2cdb3b81;
+  border-radius: 4px;
+  max-width: 800px;
+}
+
+.list-text__incomes {
+  font-size: 22px;
+  font-weight: lighter;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.list-costs__incomes {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto;
+  color:rgb(43, 224, 19);
+}
+
+.hidden {
+  opacity: 0;
+}

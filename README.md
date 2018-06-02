@@ -1,4 +1,4 @@
-# Create React App example
+# MoneyPal example
 
 ## How to use
 

@@ -5,16 +5,22 @@ import ListItemCosts from './ListItemCosts';
 class List extends Component {
 
   state = { 
-      costs: this.props.costs,
+      costs: [],
   };
 
+
   render() {
-    const list = this.props.costs.map(s =>
+
+
+    const list = this.props.filterMonth.map(s =>
         <ListItemCosts
             key={s.id}
             category={s.category}
             cost={s.cost}
             avatar={s.avatar}
+            month={s.month}
+            seeCosts={this.props.showCosts}
+            seeIncomes={this.props.showIncomes}
         />
     );
 

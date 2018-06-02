@@ -1,31 +1,12 @@
 import React, {Component} from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import {Bar} from 'react-chartjs-2';
-import {Line} from 'react-chartjs-2';
 
 class Chart extends Component{
   constructor(props){
     super(props);
     this.state = {
-      chartData:{
-        labels: ['Food', 'Purchases', 'Entertainment', 'Other...'],
-        datasets:[
-          {
-            data:[
-              17594,
-              481045,
-              153060,
-              95072
-            ],
-            backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              '#4af07c'
-            ]
-          }
-        ]
-      },
+      costsList: []
     }
   }
 
@@ -33,54 +14,78 @@ class Chart extends Component{
     displayTitle:true,
     displayLegend: true,
     legendPosition:'right',
-    month: "no sure"
+    month: "no sure",
   }
 
   render(){
+
+  const { labelMonth,
+          displayTitle,
+          displayLegend,
+          legendPosition,
+        } = this.props;
+
+  const textChartTitle = labelMonth ? 'Costs In '+labelMonth : 'All Costs'
+
+  const chartData = {
+      labels: ['Food', 'Purchases', 'Entertainment', 'Other...'],
+      datasets:[
+        {
+          data:[this.props.food,this.props.purchases,this.props.entertainment,this.props.other],
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            '#4af07c'
+          ]
+        }
+      ]
+    };
+    const chartData2 = {
+      labels: ['Received money', '', 'Spent money'],
+      datasets:[
+        {
+          data:[this.props.incomesChart,0,this.props.costsChart],
+          backgroundColor:[
+            '#2be013',
+            '#f44336',
+            '#f44336',
+          ]
+        }
+      ]
+    };
+
+    console.log(this.props.incomesChart,this.props.costsChart);
+    
     return (
       <div className="chart">
         <Bar
-          data={this.state.chartData}
+          data={chartData2}
           options={{
             title:{
-              display:this.props.displayTitle,
-              text:'Largest Cities In '+this.props.location,
+              display: displayTitle,
+              text: textChartTitle,
               fontSize:25
             },
             legend:{
-              display:this.props.displayLegend,
-              position:this.props.legendPosition
-            }
-          }}
-        />
-
-        <Line
-          data={this.state.chartData}
-          options={{
-            title:{
-              display:this.props.displayTitle,
-              text:'Largest Cities In '+this.props.location,
-              fontSize:25
-            },
-            legend:{
-              display:this.props.displayLegend,
-              position:this.props.legendPosition
+              display: displayLegend,
+              position: legendPosition
             }
           }}
         />
 
         <Doughnut
-          data={this.state.chartData}
+          data={chartData}
           options={{
             title:{
-              display:this.props.displayTitle,
-              text:'Costs In '+this.props.labelMonth,
-              fontSize:30,
+              display: displayTitle,
+              text: textChartTitle,
+              fontSize: 30,
               
             },
             legend:{
-              display:this.props.displayLegend,
-              position:this.props.legendPosition
+              display: displayLegend,
+              position: legendPosition
             }
           }}
         />

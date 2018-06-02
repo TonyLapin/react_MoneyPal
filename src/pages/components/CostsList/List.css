@@ -26,6 +26,12 @@
   margin-bottom: 8px;
   margin-left: 16px;
 }
+.list-text1 {
+  font-size: 16px;
+  margin-bottom: auto;
+  margin-left: auto;
+  text-decoration: underline
+}
 
 .list-costs {
   font-size: 20px;
@@ -63,5 +69,10 @@
 }
 
 .hidden {
-  opacity: 0;
+  display: none;
 }
+
+.listhidden {
+  display: none;
+}
+

@@ -1,6 +1,7 @@
 .app {
-  max-width: 960px;
+  max-width: 760px;
   width: 100%;
+  min-width: 660px;
 }
 
 .app__header {
@@ -15,7 +16,7 @@
   background-color: #fff;
   margin-left: 20%;
   margin-right: 20%;
-  min-width: 384px;
+  min-width: 660px;
 }
 
 .app__counter {

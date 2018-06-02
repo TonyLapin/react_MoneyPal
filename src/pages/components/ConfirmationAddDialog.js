@@ -23,13 +23,12 @@ class ConfirmationAddDialog extends React.Component {
   };
 
 
-  // TODO
-
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
 
   handleOk = () => {
+
     const today = new Date();
     const month = today.getMonth()+1;
     const arr = [ 'January',
@@ -51,9 +50,9 @@ class ConfirmationAddDialog extends React.Component {
       id: Date.now(),
       cost: this.state.amount,
       month: monthStr,
-      avatar: this.state.avatar
-
+      avatar: this.state.avatar      
     };
+
     this.props.onIncomesAdd(newIncomes);
 
     let dateNow = new Date();
@@ -61,15 +60,21 @@ class ConfirmationAddDialog extends React.Component {
     let count1 = parseInt(this.props.value);
     let amount1 = parseInt(this.state.amount);
     let summ = count1 + amount1;
-    this.props.onClose(summ);
+    this.props.onClose(amount1 ? summ : count1);
     this.props.onCloseIncomes(amount1);
     this.props.onCloseDate(dateNowStr);
+    this.resetState();
   };
 
   handleCancel = () => {
     this.props.onClose(this.props.value);
   };
 
+  resetState() {
+    this.setState({
+      amount: ''
+    });
+};
 
   render() {
     
@@ -109,7 +114,6 @@ class ConfirmationAddDialog extends React.Component {
 }
 
 ConfirmationAddDialog.propTypes = {
-  onClose: PropTypes.func,
   value: PropTypes.number,
 };
 

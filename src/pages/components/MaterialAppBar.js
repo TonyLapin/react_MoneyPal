@@ -8,6 +8,7 @@ import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 
 
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -18,11 +19,6 @@ const styles = {
     fontSize: "18px"
 
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  
 };
 
 class MaterialAppBar extends React.Component {
@@ -33,7 +29,7 @@ class MaterialAppBar extends React.Component {
         
         <AppBar position="static">
           <Toolbar>
-            <IconButton 
+            <IconButton
               color="inherit" 
               aria-label="Menu"
               onClick={this.props.openDialogIncomes}>
@@ -43,7 +39,11 @@ class MaterialAppBar extends React.Component {
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
                 <p style={{fontSize: 28}}>Money Pal</p>
-                <p>{this.props.count}</p>
+                <p 
+                  style={(this.props.count>=0) ? 
+                    {color: '#2be013',fontSize: 22} : 
+                    {color: '#f44336',fontSize: 28}}
+                >{this.props.count}</p>
             </Typography>
 
             <IconButton 

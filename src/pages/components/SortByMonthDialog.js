@@ -10,13 +10,10 @@ import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 
-class ConfirmationDialog extends React.Component {
+
+class SortByMonthDialog extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -44,51 +41,16 @@ class ConfirmationDialog extends React.Component {
   };
 
   handleCancel = () => {
-    this.props.onClose(this.props.value);
-    this.props.onCloseCount(this.props.count);
-    this.resetState();
+    this.props.onClose('');
   };
 
   handleOk = () => {
-    
-    const today = new Date();
-    const month = today.getMonth()+1;
-    const arr = [ 'January',
-                  'February',  
-                  'March', 
-                  'April', 
-                  'May',
-                  'June',  
-                  'July',  
-                  'August', 
-                  'September',  
-                  'October',  
-                  'November',
-                  'December'
-                ];
-    let monthStr = arr[month-1];
-    const newCosts = {
-      id: Date.now(),
-      cost: this.state.amount,
-      category: this.state.value,
-      month: monthStr,
-      avatar: this.state.avatar
-    };
-    this.props.onCostsAdd(newCosts);
-
-    let dateNow = new Date();
-    let dateNowStr = dateNow.toString();
-    this.props.onClose(this.state.value);
-    let count1 = parseInt(this.props.count);
-    let amount1 = parseInt(this.state.amount);
-    let summ = count1 - amount1;
-    this.props.onCloseCount(amount1 ? summ : count1);
-    this.props.onCloseCosts(amount1);
-    this.props.onCloseDate(dateNowStr);
-    this.resetState();
+    this.state.value === 'All month' ? 
+    this.props.onClose('') : 
+    this.props.onClose(this.state.value)
   };
 
-  handleChangeCategory = (event, value) => {
+  handleChangeMonth = (event, value) => {
     this.setState({ value });
 
     if (value === "Food") {
@@ -107,15 +69,22 @@ class ConfirmationDialog extends React.Component {
     this.setState({ [prop]: event.target.value });
   };
 
-  resetState() {
-    this.setState({
-      amount: ''
-    });
-};
-
+  
   render() {
-    const options = ['Food', 'Purchases', 'Entertainment', 'Other...'];
-
+     const options =[ 'All month',
+                      'January',
+                      'February',  
+                      'March', 
+                      'April', 
+                      'May',
+                      'June',  
+                      'July',  
+                      'August', 
+                      'September',  
+                      'October',  
+                      'November',
+                      'December'
+                    ];
     const { value, ...other } = this.props;
 
     return (
@@ -127,7 +96,7 @@ class ConfirmationDialog extends React.Component {
         aria-labelledby="confirmation-dialog-title"
         {...other}
       >
-        <DialogTitle id="confirmation-dialog-title">Enter Costs</DialogTitle>
+        <DialogTitle id="confirmation-dialog-title">Choose month</DialogTitle>
         <DialogContent>
           <RadioGroup
             ref={node => {
@@ -136,13 +105,13 @@ class ConfirmationDialog extends React.Component {
             aria-label="ringtone"
             name="ringtone"
             value={this.state.value}
-            onChange={this.handleChangeCategory}
+            onChange={this.handleChangeMonth}
           >
             {options.map(option => (
               <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
             ))}
           </RadioGroup>
-          <FormControl fullWidth >
+          {/* <FormControl fullWidth >
               <InputLabel htmlFor="adornment-amount">Costs</InputLabel>
               <Input
                   type="number"
@@ -150,7 +119,7 @@ class ConfirmationDialog extends React.Component {
                   onChange={this.handleChangeAmount('amount')}
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
             />
-        </FormControl>
+        </FormControl> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleCancel} color="primary">
@@ -165,11 +134,11 @@ class ConfirmationDialog extends React.Component {
   }
 }
 
-ConfirmationDialog.propTypes = {
+SortByMonthDialog.propTypes = {
   onClose: PropTypes.func,
   value: PropTypes.string,
 };
 
 
 
-export default ConfirmationDialog;
+export default SortByMonthDialog;

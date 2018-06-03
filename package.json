@@ -2,13 +2,15 @@
   "name": "create-react-app",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://tonylapin.github.io/react_MoneyPal/",
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^1.0.0",
     "chart.js": "^2.6.0",
-    "react-chartjs-2": "^2.1.0",
+    "gh-pages": "^1.2.0",
     "prop-types": "latest",
     "react": "latest",
+    "react-chartjs-2": "^2.1.0",
     "react-dom": "latest",
     "react-scripts": "latest"
   },
@@ -16,6 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   }
 }

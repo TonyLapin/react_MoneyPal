@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
 
-import './App.css';
-
-
 import MaterialAppBar from './components/MaterialAppBar';
 import SimpleExpansionPanel from './components/SimpleExpansionPanel';
 import ConfirmationDialog from './components/ConfirmationDialog';
 import ConfirmationAddDialog from './components/ConfirmationAddDialog';
 import SortByMonthDialog from './components/SortByMonthDialog';
 
+import './App.css';
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
 
+  state = {
       openCosts: false,
       openIncomes: false,
       openSortByMonth: false,
       count: 0,
-      costsFilterMonth: [],
-      category: 'Choose category',
+      category: '',
       costsList: [],
-      menu: '',
+      menuMonth: '',
       sortByMoney: ''
-    }
   }
-  
+
   componentWillMount() {
     const savedCosts = JSON.parse(localStorage.getItem('costsList'));
     if (savedCosts) {
@@ -74,7 +68,7 @@ class App extends Component {
   };
 
   handleCloseSortByMonthDialog = value => {
-    this.setState({ menu: value, openSortByMonth: false });
+    this.setState({ menuMonth: value, openSortByMonth: false });
   };
 
   handleOpenDialogByMonth = event => {
@@ -110,18 +104,19 @@ class App extends Component {
   };
 
   render() {
-    const { costsList, menu, sortByMoney} = this.state;
+    const { costsList, menuMonth, sortByMoney} = this.state;
 
-    const filterMonth = costsList.filter(this.searchForMonth(menu));
+    const filterMonth = costsList.filter(this.searchForMonth(menuMonth));
+
+    const dataChartCategory = menuMonth ? filterMonth : costsList;
     
-    const incomesSum = costsList.filter(this.searchForIncomes()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
-    const CostsSum = costsList.filter(this.searchForCosts()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
+    const incomesSum = dataChartCategory.filter(this.searchForIncomes()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
+    const CostsSum = dataChartCategory.filter(this.searchForCosts()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     
     const sortByMoneyList = sortByMoney==="moneyUp" ?
           costsList.slice().sort(this.sortUp) : 
           costsList.slice().sort(this.sortUp).reverse()
  
-    const dataChartCategory = menu ? filterMonth : costsList;
     const foodCosts = dataChartCategory.filter(this.searchForCategory("Food")).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     const purchasesCosts = dataChartCategory.filter(this.searchForCategory("Purchases")).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     const entertainmentCosts = dataChartCategory.filter(this.searchForCategory("Entertainment")).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
@@ -144,10 +139,10 @@ class App extends Component {
         <SimpleExpansionPanel 
           changeMonth={this.handleOpenDialogByMonth}
           costs={costsList}
-          filterMonth={menu ? filterMonth : costsList}
+          filterMonth={menuMonth ? filterMonth : costsList}
           listByMoney={sortByMoneyList}
           flagFilterSortByMoney={sortByMoney}
-          nowMonth={menu}
+          nowMonth={menuMonth}
           foodCosts={foodCosts}
           purchasesCosts={purchasesCosts}
           entertainmentCosts={entertainmentCosts}
@@ -182,7 +177,7 @@ class App extends Component {
 
         <SortByMonthDialog
           open={this.state.openSortByMonth}
-          value={this.state.menu}
+          value={this.state.menuMonth}
           onClose={this.handleCloseSortByMonthDialog}
         />
       </div>

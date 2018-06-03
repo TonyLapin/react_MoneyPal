@@ -3,12 +3,6 @@ import {Doughnut} from 'react-chartjs-2';
 import {Bar} from 'react-chartjs-2';
 
 class Chart extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      costsList: []
-    }
-  }
 
   static defaultProps = {
     displayTitle:true,
@@ -18,28 +12,28 @@ class Chart extends Component{
   }
 
   render(){
+    const { labelMonth,
+            displayTitle,
+            displayLegend,
+            legendPosition,
+          } = this.props;
 
-  const { labelMonth,
-          displayTitle,
-          displayLegend,
-          legendPosition,
-        } = this.props;
+    const textChartTitle = labelMonth ? 'Costs In '+labelMonth : 'All Costs'
+    const textChartTitle2 = labelMonth ? 'In '+labelMonth : 'All Period'
 
-  const textChartTitle = labelMonth ? 'Costs In '+labelMonth : 'All Costs'
-
-  const chartData = {
-      labels: ['Food', 'Purchases', 'Entertainment', 'Other...'],
-      datasets:[
-        {
-          data:[this.props.food,this.props.purchases,this.props.entertainment,this.props.other],
-          backgroundColor:[
-            'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            '#4af07c'
-          ]
-        }
-      ]
+    const chartData = {
+        labels: ['Food', 'Purchases', 'Entertainment', 'Other...'],
+        datasets:[
+          {
+            data:[this.props.food,this.props.purchases,this.props.entertainment,this.props.other],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              '#4af07c'
+            ]
+          }
+        ]
     };
     const chartData2 = {
       labels: ['Received money', '', 'Spent money'],
@@ -55,33 +49,27 @@ class Chart extends Component{
       ]
     };
 
-    console.log(this.props.incomesChart,this.props.costsChart);
-    
     return (
       <div className="chart">
+        <Doughnut
+          data={chartData}
+          options={{title:{
+                      display: displayTitle,
+                      text: textChartTitle,
+                      fontSize: 30},
+                    legend:{
+                      display: displayLegend,
+                      position: legendPosition}
+          }}
+        />
+        <hr/>
         <Bar
           data={chartData2}
           options={{
             title:{
               display: displayTitle,
-              text: textChartTitle,
+              text: textChartTitle2,
               fontSize:25
-            },
-            legend:{
-              display: displayLegend,
-              position: legendPosition
-            }
-          }}
-        />
-
-        <Doughnut
-          data={chartData}
-          options={{
-            title:{
-              display: displayTitle,
-              text: textChartTitle,
-              fontSize: 30,
-              
             },
             legend:{
               display: displayLegend,

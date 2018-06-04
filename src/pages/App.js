@@ -114,8 +114,8 @@ class App extends Component {
     const CostsSum = dataChartCategory.filter(this.searchForCosts()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     
     const sortByMoneyList = sortByMoney==="moneyUp" ?
-          costsList.slice().sort(this.sortUp) : 
-          costsList.slice().sort(this.sortUp).reverse()
+    dataChartCategory.slice().sort(this.sortUp) : 
+    dataChartCategory.slice().sort(this.sortUp).reverse()
  
     const foodCosts = dataChartCategory.filter(this.searchForCategory("Food")).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     const purchasesCosts = dataChartCategory.filter(this.searchForCategory("Purchases")).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);

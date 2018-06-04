@@ -16,7 +16,7 @@ class App extends Component {
       count: 0,
       category: '',
       costsList: [],
-      menuMonth: '',
+      menu: '',
       sortByMoney: ''
   }
 
@@ -68,7 +68,7 @@ class App extends Component {
   };
 
   handleCloseSortByMonthDialog = value => {
-    this.setState({ menuMonth: value, openSortByMonth: false });
+    this.setState({ menu: value, openSortByMonth: false });
   };
 
   handleOpenDialogByMonth = event => {
@@ -104,11 +104,11 @@ class App extends Component {
   };
 
   render() {
-    const { costsList, menuMonth, sortByMoney} = this.state;
+    const { costsList, menu, sortByMoney} = this.state;
 
-    const filterMonth = costsList.filter(this.searchForMonth(menuMonth));
+    const filterMonth = costsList.filter(this.searchForMonth(menu));
 
-    const dataChartCategory = menuMonth ? filterMonth : costsList;
+    const dataChartCategory = menu ? filterMonth : costsList;
     
     const incomesSum = dataChartCategory.filter(this.searchForIncomes()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
     const CostsSum = dataChartCategory.filter(this.searchForCosts()).map(item =>  (+item.cost)).reduce((sum, current) => {return sum + current}, 0);
@@ -139,10 +139,10 @@ class App extends Component {
         <SimpleExpansionPanel 
           changeMonth={this.handleOpenDialogByMonth}
           costs={costsList}
-          filterMonth={menuMonth ? filterMonth : costsList}
+          filterMonth={menu ? filterMonth : costsList}
           listByMoney={sortByMoneyList}
           flagFilterSortByMoney={sortByMoney}
-          nowMonth={menuMonth}
+          nowMonth={menu}
           foodCosts={foodCosts}
           purchasesCosts={purchasesCosts}
           entertainmentCosts={entertainmentCosts}
@@ -177,7 +177,7 @@ class App extends Component {
 
         <SortByMonthDialog
           open={this.state.openSortByMonth}
-          value={this.state.menuMonth}
+          value={this.state.menu}
           onClose={this.handleCloseSortByMonthDialog}
         />
       </div>
